@@ -10,11 +10,24 @@ class SlidingWindowLimiter(RateLimitStrategy):
         self.requests = defaultdict(deque)
 
     def allow_request(self, user_id: str, endpoint: str, current_time: float, rule: dict):
+        
         """
-        rule contains:
-        - limit: max requests allowed
-        - window_seconds: sliding window size
-        """
+Checks whether the incoming request can be served using the Sliding Window algorithm.
+
+Args:
+    user_id (str): Identifier of the user
+    endpoint (str): API endpoint
+    timestamp (float): Current request time (epoch seconds)
+    rule (dict):
+        limit (int): Maximum number of requests allowed
+        window_seconds (int): Time window size in seconds
+
+Returns:
+    Tuple[bool, Optional[int]]:
+        - True if request is allowed
+        - False if rate limit exceeded
+"""
+
 
         key = f"{user_id}:{endpoint}"
         window_size = rule["window_seconds"]
