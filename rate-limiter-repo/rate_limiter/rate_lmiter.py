@@ -18,6 +18,19 @@ class RateLimiter:
 
     def check(self, user_id: str, endpoint: str, rule: dict):
         # Normalize endpoint
+        """
+        Checks whether a request should be allowed.
+
+        Args:
+            user_id (str): Unique user identifier
+            endpoint (str): API endpoint being accessed
+            rule (dict): Rate limiting configuration
+
+        Returns:
+            Tuple[bool, Optional[int]]:
+                - allowed (bool)
+                - retry_after (int | None)
+        """
         if not endpoint.startswith("/"):
             endpoint = "/" + endpoint
 

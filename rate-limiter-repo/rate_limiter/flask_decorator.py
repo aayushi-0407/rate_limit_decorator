@@ -7,10 +7,33 @@ rate_limiter = RateLimiter()
 
 def rate_limit(**rule):
     """
-    Flask decorator for rate limiting.
+    Flask decorator to apply rate limiting on routes.
 
     Example:
-    @rate_limit(algorithm="sliding_window", limit=3, window_seconds=60)
+        @rate_limit(
+            algorithm="sliding_window",
+            limit=3,
+            window_seconds=60
+        )
+
+    Supported Parameters:
+        algorithm (str): One of
+            - "fixed_window"
+            - "sliding_window"
+            - "token_bucket"
+            - "leaky_bucket"
+
+        Fixed Window / Sliding Window:
+            limit (int): Max requests allowed
+            window_seconds (int): Time window in seconds
+
+        Token Bucket:
+            capacity (int): Max burst size
+            refill_rate (int): Tokens added per second
+
+        Leaky Bucket:
+            capacity (int): Max queue size
+            leak_rate (int): Requests processed per second
     """
     def decorator(func):
         @wraps(func)
