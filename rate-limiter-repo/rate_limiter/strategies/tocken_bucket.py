@@ -7,7 +7,22 @@ class Token_bucket(RateLimitStrategy):
         self.buckets=defaultdict(lambda: {'tokens': 0, 'last_refill': None})
 
     def allow_request(self, user_id: str, endpoint: str, current_time: float, rule: dict):
+        """
+        Checks whether the incoming request can be served.
 
+        Args:
+            user_id (str): Identifier of the user
+            endpoint (str): API endpoint
+            timestamp (float): Current request time
+            rule (dict):
+                capacity (int): Maximum tokens allowed
+                refill_rate (int): Tokens added per second
+
+        Returns:
+            Tuple[bool, Optional[int]]:
+                - True if request is allowed
+                - False if rate limit exceeded
+        """
         key=f"{user_id}:{endpoint}"
         capacity=rule["capacity"]
         refill_rate=rule["refill_rate"]
