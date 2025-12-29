@@ -1,6 +1,6 @@
 # 🚦 Rate Limiter – Reusable Flask Decorator Library
 
-A reusable, production-style **rate limiting library** for Flask applications, implemented using multiple industry-standard algorithms and exposed via a **clean decorator-based API**.
+A reusable, production-style **rate limiting library** for Flask applications, implemented using 4 industry-standard algorithms and exposed PyPI
 
 The project is designed with **system design principles**, **strategy pattern**, and **real-world API use cases** in mind.
 
@@ -24,6 +24,4 @@ The project is designed with **system design principles**, **strategy pattern**,
 Clone the repository and install the package in editable mode:
 
 ```bash
-pip install -e .
-    ```
--An example app is created to understand how to use an decorator
+pip install flask-rate-limiter-lite
